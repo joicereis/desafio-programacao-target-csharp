@@ -41,6 +41,7 @@ ScaffoldingReadMe.txt
 
 # User-specific files (Mac/Linux)
 .vscode/
+.vs/
 
 # Windows Installer files
 *.cab
