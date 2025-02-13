@@ -1,0 +1,61 @@
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]ist/
+[Dd]eploy/
+[Dd]ebug*
+[Dd]ebugFinal/
+[Dd]eploy*
+[Dd]istFinal/
+bin/
+obj/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer (WiX) files
+*.wixpdb
+
+# Windows Installer build logs
+*.wixlog
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# JetBrains Rider
+.idea/
+
+# User-specific files (Mac/Linux)
+.vscode/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# NuGet
+*.nupkg
+*.snupkg
+# Uncomment if you have projects that use NuGet
+# .nuget/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
