@@ -3,10 +3,12 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class Program
 {
+    //Desafio 1:
     public static void Main(string[] args)
     {
         Desafio1_Soma();
         Desafio2_Fibonacci();
+        Desafio3_Faturamento();
     }
 
     private static void Desafio1_Soma()
@@ -19,6 +21,8 @@ public class Program
         }
         Console.WriteLine(SOMA);
     }
+
+    //Desafio 2:
     private static void Desafio2_Fibonacci()
     {
         try
@@ -57,4 +61,52 @@ public class Program
         else
             return false;
     }
+
+    //Desafio 3:
+    private static void Desafio3_Faturamento()
+    {
+        var faturamentoDiario = new double[] { 4827.26, 5412.34, 5318.28, 0, 5746.82, 4823.58, 0, 4792.56, 5235.47, 0 };
+
+        double menorValorFaturamento = double.MaxValue;
+        double maiorValorFaturamento = double.MinValue;
+        double totalFaturamento = 0;
+        int diasComFaturamento = 0;
+        int diasAcimaMedia = 0;
+
+        foreach (var faturamento in faturamentoDiario)
+        {
+            if (faturamento > 0)
+            {
+                if (faturamento < menorValorFaturamento)
+                {
+                    menorValorFaturamento = faturamento;
+                }
+
+                if (faturamento > maiorValorFaturamento)
+                {
+                    maiorValorFaturamento = faturamento;
+                }
+
+                totalFaturamento += faturamento;
+                diasComFaturamento++;
+            }
+        }
+
+        double mediaFaturamento = totalFaturamento / diasComFaturamento;
+
+        foreach (var faturamento in faturamentoDiario)
+        {
+            if (faturamento > mediaFaturamento)
+            {
+                diasAcimaMedia++;
+            }
+        }
+
+        Console.WriteLine($"Menor faturamento: R${menorValorFaturamento}");
+        Console.WriteLine($"Maior faturamento: R${maiorValorFaturamento}");
+        Console.WriteLine($"Dias com faturamento acima da média: {diasAcimaMedia}");
+    }
+
+
+
 }
