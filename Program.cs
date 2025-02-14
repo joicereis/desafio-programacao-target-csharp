@@ -153,18 +153,12 @@ public class Program
 
         double faturamentoTotal = faturamentoSP + faturamentoRJ + faturamentoMG + faturamentoES + faturamentoOutros;
 
-        double percentualSP = (faturamentoSP / faturamentoTotal) * 100;
-        double percentualRJ = (faturamentoRJ / faturamentoTotal) * 100;
-        double percentualMG = (faturamentoMG / faturamentoTotal) * 100;
-        double percentualES = (faturamentoES / faturamentoTotal) * 100;
-        double percentualOutros = (faturamentoOutros / faturamentoTotal) * 100;
-
         Console.WriteLine("Percentual de representação de cada estado:");
-        Console.WriteLine($"SP: {percentualSP:F2}%");
-        Console.WriteLine($"RJ: {percentualRJ:F2}%");
-        Console.WriteLine($"MG: {percentualMG:F2}%");
-        Console.WriteLine($"ES: {percentualES:F2}%");
-        Console.WriteLine($"Outros: {percentualOutros:F2}%");
+        Console.WriteLine($"SP: {((faturamentoSP / faturamentoTotal) * 100):F2}%");
+        Console.WriteLine($"RJ: {((faturamentoRJ / faturamentoTotal) * 100):F2}%");
+        Console.WriteLine($"MG: {((faturamentoMG / faturamentoTotal) * 100):F2}%");
+        Console.WriteLine($"ES: {((faturamentoES / faturamentoTotal) * 100):F2}%");
+        Console.WriteLine($"Outros: {((faturamentoOutros / faturamentoTotal) * 100):F2}%");
     }
 
 
