@@ -8,14 +8,16 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("\n\nDesafio 1");
+        Console.WriteLine("\nDesafio 1");
         Desafio1_Soma();
-        Console.WriteLine("\n\nDesafio 2");
+        Console.WriteLine("\nDesafio 2");
         Desafio2_Fibonacci();
-        Console.WriteLine("\n\nDesafio 3");
+        Console.WriteLine("\nDesafio 3");
         Desafio3_Faturamento();
-        Console.WriteLine("\n\nDesafio 4");
+        Console.WriteLine("\nDesafio 4");
         Desafio4_Porcentagem();
+        Console.WriteLine("\nDesafio 5");
+        Desafio5_InvertePalavras();
     }
 
     //Desafio 1:
@@ -161,5 +163,20 @@ public class Program
         Console.WriteLine($"Outros: {((faturamentoOutros / faturamentoTotal) * 100):F2}%");
     }
 
+    //Desafio 5:
+    private static void Desafio5_InvertePalavras()
+    {
+        Console.WriteLine("Informe uma palavra ou frase para ser escrita de forma invertida:");
+        string stringDigitada = Console.ReadLine();
+        string stringInvertida = "";
+
+        for (int i = stringDigitada.Length - 1; i >= 0; i--)
+        {
+            stringInvertida += stringDigitada[i];
+        }
+
+        Console.WriteLine($"Frase original: {stringDigitada}");
+        Console.WriteLine($"Frase invertida: {stringInvertida}");
+    }
 
 }
