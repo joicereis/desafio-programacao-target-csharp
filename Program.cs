@@ -1,16 +1,24 @@
 ﻿using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Newtonsoft.Json;
+using System.IO;
+using System.Linq;
 
 public class Program
 {
-    //Desafio 1:
     public static void Main(string[] args)
     {
+        Console.WriteLine("\n\nDesafio 1");
         Desafio1_Soma();
+        Console.WriteLine("\n\nDesafio 2");
         Desafio2_Fibonacci();
+        Console.WriteLine("\n\nDesafio 3");
         Desafio3_Faturamento();
+        Console.WriteLine("\n\nDesafio 4");
+        Desafio4_Porcentagem();
     }
 
+    //Desafio 1:
     private static void Desafio1_Soma()
     {
         int INDICE = 13, SOMA = 0, K = 0;
@@ -65,48 +73,99 @@ public class Program
     //Desafio 3:
     private static void Desafio3_Faturamento()
     {
-        var faturamentoDiario = new double[] { 4827.26, 5412.34, 5318.28, 0, 5746.82, 4823.58, 0, 4792.56, 5235.47, 0 };
+        double[] faturamentoDiario;
 
-        double menorValorFaturamento = double.MaxValue;
-        double maiorValorFaturamento = double.MinValue;
-        double totalFaturamento = 0;
-        int diasComFaturamento = 0;
-        int diasAcimaMedia = 0;
-
-        foreach (var faturamento in faturamentoDiario)
+        try
         {
-            if (faturamento > 0)
+            string caminhoArquivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "dadosFaturamento.json");
+            string json = File.ReadAllText(caminhoArquivo);
+            var dados = JsonConvert.DeserializeObject<Dictionary<string, double[]>>(json);
+
+            if (dados != null && dados.ContainsKey("faturamentoDiario"))
             {
-                if (faturamento < menorValorFaturamento)
-                {
-                    menorValorFaturamento = faturamento;
-                }
-
-                if (faturamento > maiorValorFaturamento)
-                {
-                    maiorValorFaturamento = faturamento;
-                }
-
-                totalFaturamento += faturamento;
-                diasComFaturamento++;
+                faturamentoDiario = dados["faturamentoDiario"];
             }
+            else
+            {
+                Console.WriteLine("Erro: Estrutura do JSON inválida.");
+                return;
+            }
+
+            double menorValorFaturamento = double.MaxValue;
+            double maiorValorFaturamento = double.MinValue;
+            double totalFaturamento = 0;
+            int diasComFaturamento = 0;
+            int diasAcimaMedia = 0;
+
+            foreach (var faturamento in faturamentoDiario)
+            {
+                if (faturamento > 0)
+                {
+                    if (faturamento < menorValorFaturamento)
+                    {
+                        menorValorFaturamento = faturamento;
+                    }
+
+                    if (faturamento > maiorValorFaturamento)
+                    {
+                        maiorValorFaturamento = faturamento;
+                    }
+
+                    totalFaturamento += faturamento;
+                    diasComFaturamento++;
+                }
+            }
+
+            if (diasComFaturamento == 0)
+            {
+                Console.WriteLine("Não há dias com faturamento para calcular a média.");
+                return;
+            }
+
+            double mediaFaturamento = totalFaturamento / diasComFaturamento;
+
+            foreach (var faturamento in faturamentoDiario)
+            {
+                if (faturamento > mediaFaturamento)
+                {
+                    diasAcimaMedia++;
+                }
+            }
+
+            Console.WriteLine($"Menor faturamento: R${menorValorFaturamento:F2}");
+            Console.WriteLine($"Maior faturamento: R${maiorValorFaturamento:F2}");
+            Console.WriteLine($"Dias com faturamento acima da média: {diasAcimaMedia}");
         }
-
-        double mediaFaturamento = totalFaturamento / diasComFaturamento;
-
-        foreach (var faturamento in faturamentoDiario)
+        catch (Exception ex)
         {
-            if (faturamento > mediaFaturamento)
-            {
-                diasAcimaMedia++;
-            }
+            Console.WriteLine($"Erro ao processar o arquivo JSON: {ex.Message}");
         }
-
-        Console.WriteLine($"Menor faturamento: R${menorValorFaturamento}");
-        Console.WriteLine($"Maior faturamento: R${maiorValorFaturamento}");
-        Console.WriteLine($"Dias com faturamento acima da média: {diasAcimaMedia}");
     }
 
+    //Desafio 4:
+    private static void Desafio4_Porcentagem()
+    {
+        double faturamentoSP = 67836.43;
+        double faturamentoRJ = 36678.66;
+        double faturamentoMG = 29229.88;
+        double faturamentoES = 27165.48;
+        double faturamentoOutros = 19849.53;
+
+        double faturamentoTotal = faturamentoSP + faturamentoRJ + faturamentoMG + faturamentoES + faturamentoOutros;
+
+        double percentualSP = (faturamentoSP / faturamentoTotal) * 100;
+        double percentualRJ = (faturamentoRJ / faturamentoTotal) * 100;
+        double percentualMG = (faturamentoMG / faturamentoTotal) * 100;
+        double percentualES = (faturamentoES / faturamentoTotal) * 100;
+        double percentualOutros = (faturamentoOutros / faturamentoTotal) * 100;
+
+        Console.WriteLine("Percentual de representação de cada estado:");
+        Console.WriteLine($"SP: {percentualSP:F2}%");
+        Console.WriteLine($"RJ: {percentualRJ:F2}%");
+        Console.WriteLine($"MG: {percentualMG:F2}%");
+        Console.WriteLine($"ES: {percentualES:F2}%");
+        Console.WriteLine($"Outros: {percentualOutros:F2}%");
+    }
 
 
 }
